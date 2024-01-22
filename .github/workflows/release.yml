@@ -24,6 +24,16 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Download and Install Android SDK
+        run: |
+         wget https://dl.google.com/android/repository/sdk-tools-linux-<version>.zip
+         unzip sdk-tools-linux-30.0.3.zip -d $HOME/android-sdk
+         echo 'export ANDROID_SDK_ROOT=$HOME/android-sdk' >> $GITHUB_ENV
+         echo 'export PATH=$PATH:$HOME/android-sdk/tools/bin' >> $GITHUB_ENV
+
+      - name: Accept Android licenses
+        run: yes | sdkmanager --licenses
+
       - name: Build with Gradle
         run: ./gradlew assembleRelease
 
@@ -36,7 +46,7 @@ jobs:
           keyAlias: ${{ secrets.ANDROID_KEY_ALIAS }}
           keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
-          buildToolsVersion: 33.0.0
+          buildToolsVersion: 30.0.3
 
       - name: Upload to Release Action
         uses: Shopify/upload-to-release@v1.0.1
