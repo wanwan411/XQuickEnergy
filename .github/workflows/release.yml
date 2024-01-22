@@ -26,8 +26,8 @@ jobs:
 
       - name: Download and Install Android SDK
         run: |
-         wget https://dl.google.com/android/repository/sdk-tools-linux-30.0.3.zip
-         unzip sdk-tools-linux-30.0.3.zip -d $HOME/android-sdk
+         wget https://dl.google.com/android/repository/build-tools_r30.0.3-linux.zip
+         unzip build-tools_r30.0.3-linux.zip -d $HOME/android-sdk
          echo 'export ANDROID_SDK_ROOT=$HOME/android-sdk' >> $GITHUB_ENV
          echo 'export PATH=$PATH:$HOME/android-sdk/tools/bin' >> $GITHUB_ENV
 
